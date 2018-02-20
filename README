@@ -1,0 +1,74 @@
+	Mocanu Alexandru George 
+	325 CB
+	
+		Tema 2
+		
+  Implementarea curenta doreste sa ofere un mod de filtrare al unui feed, in functie de 
+ anumite anumite filtre. Pentre a se realiza aceastra filtrare a continutului s-a utilizat 
+ pattern-ul Observer, ce presupune existenta mai multor observatori care sa contina diferite
+ filtre si a unui subiect care sa contina informatiile ce urmeaza a fi filtrate.
+
+	In urmatoarea schema se va exemplifica dependenta fiecarei clase din program
+	
+	
+					   Visitor					 Visitable
+						  |							 |
+						  |						DecisionNode
+						  |						|		  	|
+					 TreeVisitor		 	----		  	------
+						  |					|					 |
+						  |					|					 |
+	Content------------Observer			OperandNode       	OperatorNode
+						  |				 |					   |
+						  |				 |				 	   |
+						  |              |				 	   |
+	StringtoRpn------ObserverFactory-----OperatorsFactory------
+						  |
+						  |
+			   Feed	------
+			   
+  Astfel clasele ObserverFactory, OperatorsFactory si Feed sunt de tipul singleton,primele
+ doua folosind patternul Factory.
+ 
+ 		Descrierea functionalitatii claselor
+ 		
+ Content: aceasta clasa este una auxiliara pentru definirea continutului ce urmeaza a 
+ 		  fi stocat in fiecare dintre observatori.
+ 
+ DesicionNode: clasa ce defineste structura unui nod dintr-un arbore si care implementeaza
+ 			   clasa Visitable pentru utilizarea patternului Visitor in parcurgerea arborelui
+ 			   de decizie.
+ 			  
+ Feed: aceasta este o clasa singleton, fiind si subiectul observatorilor, deoarece aici este
+ 	   pastrat fluxul de informatii.
+ 
+ Observer: clasa cea mai importanta, ce descrie modul de creeare si de filtrare al continutului
+ 		   din feed. De asemenea tot aici este folosita parcurgerea Visitor.
+ 
+ ObserverFactory: dupa cum sugereaza si numele aceasta este clasa ce creeaza instante ale
+ 				  observatorilor.
+ 
+ OperandNode : extinde conceptul de nod al unui arbore, specificitatea sa este data de 
+ 			   continutul acestui nod, acesta retinand expresiile de filtrare.
+ 
+ OperatorNode: la fel ca OperandNode aceasta clasa difera prin faptul ca retine tipul de 
+ 			   operator.
+ 			
+ OperatorsFactory: la fel ca in cazul ObserverFactory aceasta clasa creeaza noduri pentru 
+ 				   arborele de decizie.
+ 
+ StringtoRPN: aceasta clasa auxiliara este utilizata pentru a transforma o expresie 
+ 			  parantezata, reprezentand filtrul, intr-un vector de stringuri,convertind
+ 			  aceasta expreisie in reverse polish notation, pentru a creea mai usor 
+ 			  arborele de decizie.
+ 			  
+ TreeVisitor: este clasa vizitator ce realizeaza parcurgerea arborelui de decizie, si 
+ 			  returneaza true sau false daca un anumite set nume-valoare este acceptat
+ 			  sau nu.		     				
+ 
+ Nota: pentru o buna vizualizare a schemei tab-ul trebuie sa fie de 4 nu de 8.
+ 
+ 
+ 
+ 
+ 
